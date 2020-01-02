@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		
+		<title>企业信息查询</title>
+		<meta name="description" content="Free Bootstrap 4 Admin Theme | Pike Admin">
+		
+
+		<!-- Favicon -->
+		<link rel="shortcut icon" href="assets/images/favicon.ico">
+
+		<!-- Bootstrap CSS -->
+		<link href="assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+		
+		<!-- Font Awesome CSS -->
+		<link href="assets/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+		
+		<!-- Custom CSS -->
+		<link href="assets/css/style.css" rel="stylesheet" type="text/css" />
+		
+		<!-- BEGIN CSS for this page -->
+		<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap4.min.css"/>
+		<!-- END CSS for this page -->
+		
+</head>
+
+<body class="adminbody">
+
+<div id="main">
+
+	<!-- top bar navigation -->
+	<div class="headerbar">
+
+		<!-- LOGO -->
+        <div class="headerbar-left">
+			<a href="index.html" class="logo"><img alt="Logo" src="assets/images/logo.png" /> <span>数据库大作业</span></a>
+        </div>
+
+        <nav class="navbar-custom">
+
+                    <ul class="list-inline float-right mb-0">
+						
+						<li class="list-inline-item dropdown notif">
+                            <a class="nav-link dropdown-toggle arrow-none" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
+                                <i class="fa fa-fw fa-question-circle"></i>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right dropdown-arrow dropdown-arrow-success dropdown-lg">
+                                <!-- item-->
+                                <div class="dropdown-item noti-title">
+                                    <h5><small>Help and Support</small></h5>
+                                </div>
+
+                                <!-- item-->
+                                <a target="_blank" href="#" class="dropdown-item notify-item">                                    
+                                    <p class="notify-details ml-0">
+                                        <b>Do you want custom development to integrate this theme?</b>
+                                        <span>Contact Us</span>
+                                    </p>
+                                </a>
+
+                                <!-- item-->
+                                <a target="_blank" href="#" class="dropdown-item notify-item">                                    
+                                    <p class="notify-details ml-0">
+                                        <b>Do you want PHP version of the theme that save dozens of hours of work?</b>
+                                        <span>Try Pike Admin PRO</span>
+                                    </p>
+                                </a>                               
+
+                                <!-- All-->
+                                <a title="Clcik to visit Pike Admin Website" target="_blank" href="#" class="dropdown-item notify-item notify-all">
+                                    <i class="fa fa-link"></i> Visit Pike Admin Website
+                                </a>
+
+                            </div>
+                        </li>
+						
+                        <li class="list-inline-item dropdown notif">
+                            <a class="nav-link dropdown-toggle arrow-none" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
+                                <i class="fa fa-fw fa-envelope-o"></i><span class="notif-bullet"></span>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right dropdown-arrow dropdown-arrow-success dropdown-lg">
+                                <!-- item-->
+                                <div class="dropdown-item noti-title">
+                                    <h5><small><span class="label label-danger pull-xs-right">12</span>Contact Messages</small></h5>
+                                </div>
+
+                                <!-- item-->
+                                <a href="#" class="dropdown-item notify-item">                                    
+                                    <p class="notify-details ml-0">
+                                        <b>Jokn Doe</b>
+                                        <span>New message received</span>
+                                        <small class="text-muted">2 minutes ago</small>
+                                    </p>
+                                </a>
+
+                                <!-- item-->
+                                <a href="#" class="dropdown-item notify-item">                                    
+                                    <p class="notify-details ml-0">
+                                        <b>Michael Jackson</b>
+                                        <span>New message received</span>
+                                        <small class="text-muted">15 minutes ago</small>
+                                    </p>
+                                </a>
+
+                                <!-- item-->
+                                <a href="#" class="dropdown-item notify-item">                                    
+                                    <p class="notify-details ml-0">
+                                        <b>Foxy Johnes</b>
+                                        <span>New message received</span>
+                                        <small class="text-muted">Yesterday, 13:30</small>
+                                    </p>
+                                </a>
+
+                                <!-- All-->
+                                <a href="#" class="dropdown-item notify-item notify-all">
+                                    View All
+                                </a>
+
+                            </div>
+                        </li>
+                        
+						<li class="list-inline-item dropdown notif">
+                            <a class="nav-link dropdown-toggle arrow-none" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
+                                <i class="fa fa-fw fa-bell-o"></i><span class="notif-bullet"></span>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right dropdown-arrow dropdown-lg">
+								<!-- item-->
+                                <div class="dropdown-item noti-title">
+                                    <h5><small><span class="label label-danger pull-xs-right">5</span>Allerts</small></h5>
+                                </div>
+								
+                                <!-- item-->
+                                <a href="#" class="dropdown-item notify-item">
+                                    <div class="notify-icon bg-faded">
+                                        <img src="assets/images/avatars/avatar2.png" alt="img" class="rounded-circle img-fluid">
+                                    </div>
+                                    <p class="notify-details">
+                                        <b>John Doe</b>
+                                        <span>User registration</span>
+                                        <small class="text-muted">3 minutes ago</small>
+                                    </p>
+                                </a>
+
+                                <!-- item-->
+                                <a href="#" class="dropdown-item notify-item">
+                                    <div class="notify-icon bg-faded">
+                                        <img src="assets/images/avatars/avatar3.png" alt="img" class="rounded-circle img-fluid">
+                                    </div>
+                                    <p class="notify-details">
+                                        <b>Michael Cox</b>
+                                        <span>Task 2 completed</span>
+                                        <small class="text-muted">12 minutes ago</small>
+                                    </p>
+                                </a>
+
+                                <!-- item-->
+                                <a href="#" class="dropdown-item notify-item">
+                                    <div class="notify-icon bg-faded">
+                                        <img src="assets/images/avatars/avatar4.png" alt="img" class="rounded-circle img-fluid">
+                                    </div>
+                                    <p class="notify-details">
+                                        <b>Michelle Dolores</b>
+                                        <span>New job completed</span>
+                                        <small class="text-muted">35 minutes ago</small>
+                                    </p>
+                                </a>
+
+                                <!-- All-->
+                                <a href="#" class="dropdown-item notify-item notify-all">
+                                    View All Allerts
+                                </a>
+
+                            </div>
+                        </li>
+
+                        <li class="list-inline-item dropdown notif">
+                            <a class="nav-link dropdown-toggle nav-user" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
+                                <img src="assets/images/avatars/admin.png" alt="Profile image" class="avatar-rounded">
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right profile-dropdown ">
+                                <!-- item-->
+                                <div class="dropdown-item noti-title">
+                                    <h5 class="text-overflow"><small>Hello, admin</small> </h5>
+                                </div>
+
+                                <!-- item-->
+                                <a href="pro-profile.html" class="dropdown-item notify-item">
+                                    <i class="fa fa-user"></i> <span>Profile</span>
+                                </a>
+
+                                <!-- item-->
+                                <a href="#" class="dropdown-item notify-item">
+                                    <i class="fa fa-power-off"></i> <span>Logout</span>
+                                </a>
+								
+								<!-- item-->
+                                <a target="_blank" href="#" class="dropdown-item notify-item">
+                                    <i class="fa fa-external-link"></i> <span>Pike Admin</span>
+                                </a>
+                            </div>
+                        </li>
+
+                    </ul>
+
+                    <ul class="list-inline menu-left mb-0">
+                        <li class="float-left">
+                            <button class="button-menu-mobile open-left">
+								<i class="fa fa-fw fa-bars"></i>
+                            </button>
+                        </li>                        
+                    </ul>
+
+        </nav>
+
+	</div>
+	<!-- End Navigation -->
+	
+ 
+	<!-- Left Sidebar -->
+	<div class="left main-sidebar">
+	
+		<div class="sidebar-inner leftscroll">
+
+			<div id="sidebar-menu">
+        
+			<ul>
+
+					<li class="submenu">
+						<a href="index.html"><i class="fa fa-fw fa-bars"></i><span> 主页 </span> </a>
+                    </li>
+
+					<li class="submenu">
+                        <a href="company-query.html" class="active"><i class="fa fa-fw fa-area-chart"></i><span> 企业信息查询 </span> <span class="menu-arrow"></span></a>
+                            <ul class="list-unstyled">
+                                <li><a href="financ-deal.html">财务交易信息</a></li>
+								<li class="active"><a href="stock.html">股票变化情况</a></li>
+                                <li><a href="meeting-case.html">会议、涉案信息</a></li>
+                            </ul>
+                    </li>
+
+                    <li class="submenu">
+                        <a href="stock-holder-query.html"><i class="fa fa-fw fa-file-text-o"></i><span> 股东信息查询 </span> </a>
+                    </li>
+
+                    <li class="submenu">
+                        <a href="login.html"><i class="fa fa-fw fa-th"></i><span> 企业信息修改 </span> </a>
+                    </li>
+					
+            </ul>
+
+            <div class="clearfix"></div>
+
+			</div>
+        
+			<div class="clearfix"></div>
+
+		</div>
+
+	</div>
+	<!-- End Sidebar -->
+
+
+    <div class="content-page">
+	
+		<!-- Start content -->
+        <div class="content">
+            
+			<div class="container-fluid">
+					
+						<div class="row">
+									<div class="col-xl-12">
+											<div class="breadcrumb-holder">
+													<h1 class="main-title float-left">股票变化情况</h1>
+													<ol class="breadcrumb float-right">
+														<li class="breadcrumb-item">Home</li>
+                                                        <li class="breadcrumb-item">企业信息查询</li>
+														<li class="breadcrumb-item active">股票变化情况</li>
+													</ol>
+													<div class="clearfix"></div>
+											</div>
+									</div>
+						</div>
+						<!-- end row -->
+					
+						<div class="row">
+								<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">                        
+                                    <div class="card mb-3">
+                                        <div class="card-header">
+                                            <h3><i class="fa fa-table"></i> 企业基本信息</h3>
+                                        </div>
+                                            
+                                        <div class="card-body">
+                                            
+                                            <table class="table table-responsive-xl">
+                                              <thead>
+                                                <tr>
+                                                  <th scope="col">公司名字</th>
+                                                  <th scope="col">股票简称</th>
+                                                  <th scope="col">注册地交易所</th>
+                                                  <th scope="col">CSRC分类</th>
+                                                  <th scope="col">GICS分类</th>
+                                                </tr>
+                                              </thead>
+                                              <tbody>
+                                                <tr>
+                                                  <td>company name</td>
+                                                  <td>stock name</td>
+                                                  <td>location</td>
+                                                  <td>CSRC1</td>
+                                                  <td>GICS1</td>
+                                                </tr>
+                                              </tbody>
+                                            </table>
+                                            
+                                        </div>                                                      
+                                    </div><!-- end card-->                  
+                                </div>
+							
+						</div>
+						<!-- end row -->
+
+						<div class="row" >
+
+						  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">                        
+                                <div class="card mb-3">
+                                    <div class="card-header">
+                                        <h3><i class="fa fa-line-chart"></i> 前四大股东持股变化情况</h3>
+                                    </div>
+                                        
+                                    <div class="card-body">
+                                        <canvas id="hoder"></canvas>
+                                    </div>                          
+                                    <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
+                                </div><!-- end card-->                  
+                            </div><!-- end col--> 
+
+						</div><!-- end row-->   
+
+            </div>
+			<!-- END container-fluid -->
+
+		</div>
+		<!-- END content -->
+
+    </div>
+	<!-- END content-page -->
+    
+	<footer class="footer">
+		<span class="text-right">
+		Copyright <a target="_blank" href="#">企业信息查询系统</a>
+		</span>
+		<span class="float-right">小组成员：李静瑶 贺潇潇 冯煜
+		</span>
+	</footer>
+
+</div>
+<!-- END main -->
+
+<script src="assets/js/modernizr.min.js"></script>
+<script src="assets/js/jquery.min.js"></script>
+<script src="assets/js/moment.min.js"></script>
+		
+<script src="assets/js/popper.min.js"></script>
+<script src="assets/js/bootstrap.min.js"></script>
+
+<script src="assets/js/detect.js"></script>
+<script src="assets/js/fastclick.js"></script>
+<script src="assets/js/jquery.blockUI.js"></script>
+<script src="assets/js/jquery.nicescroll.js"></script>
+
+<!-- App js -->
+<script src="assets/js/pikeadmin.js"></script>
+
+<!-- BEGIN Java Script for this page -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+	<script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+	<script src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap4.min.js"></script>
+
+	<!-- Counter-Up-->
+	<script src="assets/plugins/waypoints/lib/jquery.waypoints.min.js"></script>
+	<script src="assets/plugins/counterup/jquery.counterup.min.js"></script>			
+
+    <script>
+        $(document).ready(function() {
+            // data-tables
+            $('#example1').DataTable();
+                    
+            // counter-up
+            $('.counter').counterUp({
+                delay: 10,
+                time: 600
+            });
+        } );        
+    </script>
+	
+	<script>
+   var ctx1 = document.getElementById("hoder").getContext('2d');
+    var hoder = new Chart(ctx1, {
+        type: 'line',
+        data: {
+            labels: [ "2010", "2011", "2012", "2013"],
+            datasets: [{
+                    type: 'line',
+                    label: '小贺',
+                    borderColor: '#484c4f',
+                    backgroundColor: '#484c4f',
+                    borderWidth: 3,
+                    fill: false,
+                    data: [12, 19, 20, 29,10],
+                }, {
+                    type: 'line',
+                    label: '小李',
+                    borderColor:  'rgba(75, 192, 192, 1)',
+                    backgroundColor: 'rgba(75, 192, 192, 1)',
+                    borderWidth: 3,
+                    fill: false,
+                    data: [ 3, 5, 2, 3,13],
+                },{
+                    type: 'line',
+                    label: '小冯',
+                    borderColor: 'rgba(255,99,132,1)',
+                    backgroundColor: 'rgba(255,99,132,1)',
+                    borderWidth: 3,
+                    fill: false,
+                    data: [12, 22, 2, 5,1],
+                },{
+                    type: 'line',
+                    label: '小王',
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    backgroundColor:'rgba(54, 162, 235, 1)',
+                    borderWidth: 3,
+                    fill: false,
+                    data: [10, 22, 21, 25,26],
+                }]
+                
+        },
+        options: {
+                        tooltips: {
+                            mode: 'index',
+                            intersect: false
+                        },
+                        responsive: true,
+                        scales: {
+                            xAxes: [{
+                                stacked: true,
+                            }],
+                            yAxes: [{
+                                stacked: true
+                            }]
+                        }
+                    }
+    });
+
+    // deal
+    var ctx1 = document.getElementById("deal").getContext('2d');
+    var deal = new Chart(ctx1, {
+        type: 'bar',
+        data: {
+            labels: ["2002", "2003", "2004", "2005", "2006", "2007", "2008", "2009", "2010", "2011", "2012", "2013"],
+            datasets: [{
+                    type: 'line',
+                    label: '总资产',
+                    borderColor: '#484c4f',
+                    backgroundColor: '#484c4f',
+                    borderWidth: 3,
+                    fill: false,
+                    data: [12, 19, 3, 5, 2, 3, 13, 17, 11, 8, 11, 9],
+                }, {
+                    type: 'line',
+                    label: '净利润',
+                    borderColor:  'rgba(75, 192, 192, 1)',
+                    backgroundColor: 'rgba(75, 192, 192, 1)',
+                    borderWidth: 3,
+                    fill: false,
+                    data: [13, 17, 11, 8, 11, 9, 12, 19, 3, 5, 2, 3],
+                },{
+                    type: 'line',
+                    label: '营业收入',
+                    borderColor: 'rgba(255,99,132,1)',
+                    backgroundColor: 'rgba(255,99,132,1)',
+                    borderWidth: 3,
+                    fill: false,
+                    data: [12, 22, 2, 5, 21, 1, 1, 7, 12, 8, 1, 11],
+                }]
+                
+        },
+        options: {
+                        tooltips: {
+                            mode: 'index',
+                            intersect: false
+                        },
+                        responsive: true,
+                        scales: {
+                            xAxes: [{
+                                stacked: true,
+                            }],
+                            yAxes: [{
+                                stacked: true
+                            }]
+                        }
+                    }
+    });
+
+
+	</script>
+<!-- END Java Script for this page -->
+
+</body>
+</html>
