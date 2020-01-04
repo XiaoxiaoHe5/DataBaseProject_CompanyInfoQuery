@@ -257,7 +257,12 @@
                     </li>
 
                     <li class="submenu">
-                        <a href="login.html" class="active"><i class="fa fa-fw fa-th"></i><span> 企业信息修改 </span> </a>
+                        <a href="login.html" class="active"><i class="fa fa-fw fa-area-chart"></i><span> 企业信息修改 </span><span class="menu-arrow"></span></a>
+                            <ul class="list-unstyled">
+                                <li><a href="modify.html">修改企业信息</a></li>
+                                <li ><a href="insert.html">增加企业涉案信息</a></li>
+                                <li><a href="delete.html">删除企业涉案信息</a></li>
+                            </ul>
                     </li>
 					
             </ul>
@@ -308,7 +313,7 @@
 
                                         <div class="card-body">
 
-                                            <form action="modify.html" data-parsley-validate novalidate>
+                                            <form action="#" data-parsley-validate novalidate>
                                                     <div class="form-group">
                                                         <label for="user_id">用户名<span class="text-danger">*</span></label>
                                                         <input type="text" name="nick" data-parsley-trigger="change" required placeholder="请输入用户名" class="form-control" id="user_id">
@@ -320,7 +325,7 @@
                                                     </div>
 
                                                     <div class="form-group text-right m-b-0">
-                                                        <button class="btn btn-primary" type="submit">
+                                                        <button class="btn btn-primary" type="submit" onclick="postData()">
                                                             提交
                                                         </button>
                                                         <button type="reset" class="btn btn-secondary m-l-5">
@@ -351,7 +356,7 @@
 		<span class="text-right">
 		Copyright <a target="_blank" href="#">企业信息查询系统</a>
 		</span>
-		<span class="float-right">小组成员：李静瑶 贺潇潇 冯煜
+		<span class="float-right">小组成员：李婧瑶 贺潇潇 冯煜
 		</span>
 	</footer>
 
@@ -360,6 +365,8 @@
 
 <script src="assets/js/modernizr.min.js"></script>
 <script src="assets/js/jquery.min.js"></script>
+<script src="assets/js/jquery.cookie.js"></script>
+
 <script src="assets/js/moment.min.js"></script>
 		
 <script src="assets/js/popper.min.js"></script>
@@ -380,6 +387,7 @@
 <script src="assets/plugins/parsleyjs/parsley.min.js"></script>
 <script>
   $('#form').parsley();
+</script>
 
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
 	<script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
@@ -390,13 +398,65 @@
 	<script src="assets/plugins/counterup/jquery.counterup.min.js"></script>			
 
 	<script>
-		$(document).ready(function() {
-			// data-tables
-			$('#company-type').DataTable();
-					
-			// counter-up
-			$('.counter').counterUp({
-				delay: 10,
+        function postData() {
+            console.log("in postData");
+            var user_id = $("#user_id").val();
+            var password = $(" #password").val();
+            var pathC = "/"
+            $.cookie('user_id', user_id, { expires: 7, path: pathC });
+            $.cookie('password', password, { expires: 7, path: pathC});
+            var dataVal = {"user_id": user_id, "password":password};
+            console.log("json sending: "+dataVal);
+
+            $.ajax({
+                url:"http://127.0.0.1:8080/Login",
+                type:"POST",
+                data : JSON.stringify(dataVal),
+                dataType: "json",
+                contenType: "application/json; charset=utf-8",
+                async : false, 
+                crossDomain: true,
+                processData: false,
+                headers: {
+                'Access-Control-Allow-Credentials' : true,
+                'Access-Control-Allow-Origin':'*',
+                'Access-Control-Allow-Methods':'OPTIONS,POST,GET',
+                'X-Conten-Type-Options':'nosniff',
+              },
+                success:function(resp) {
+                    console.log("success");
+                    console.log("resp: "+resp);
+                    if (resp.status == true){
+                        window.location.href = './modify.html';
+                        $.cookie('UStockcode', resp.UStockcode, { expires: 7, path: pathC});
+                    }
+                    else{
+                        alert(resp.error);
+                    }
+                    
+
+                },
+                error:function(resp){
+                    console.log("error");
+                    alert("unexcepted error,"+resp.error);
+                },
+            });
+        }
+
+
+        $(document).ready(function() {
+            // data-tables
+            $('#example1').DataTable();
+                    
+            // counter-up
+            $('.counter').counterUp({
+                delay: 10,
+                time: 600
+            });
+
+
+        });
+    </script>
 			
 <!-- END Java Script for this page -->
 

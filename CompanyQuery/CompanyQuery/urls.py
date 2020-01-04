@@ -19,8 +19,13 @@ from query import views
 from django.conf.urls import url
 
 urlpatterns = [
-    #url(r'^', views.index, name='index'),
     path('index', views.index, name = 'index'),
+    path('StockBasic', views.StockBasic, name = 'StockBasic'),
+    path('GetLawCase', views.GetLawCase, name = 'GetLawCase'),
+    path('GetStock', views.GetStock, name = 'GetStock'),
+    path('Login', views.Login, name = 'Login'),
+    path('Modify', views.Modify, name = 'Modify'),
 
-    #url(r'^index/', views.index, name = 'index'),
+    path('Insert', views.Insert, name='Insert'),
+
 ]

@@ -298,18 +298,18 @@
                                                 <tr>
                                                   <th scope="col">公司名字</th>
                                                   <th scope="col">股票简称</th>
-                                                  <th scope="col">注册地交易所</th>
+                                                  <th scope="col">证券交易所</th>
                                                   <th scope="col">CSRC分类</th>
                                                   <th scope="col">GICS分类</th>
                                                 </tr>
                                               </thead>
                                               <tbody>
                                                 <tr>
-                                                  <td>company name</td>
-                                                  <td>stock name</td>
-                                                  <td>location</td>
-                                                  <td>CSRC1</td>
-                                                  <td>GICS1</td>
+                                                  <td id="company_name">company name</td>
+                                                  <td id="stock_name">stock name</td>
+                                                  <td id="location">location</td>
+                                                  <td id="CSRC1">CSRC1</td>
+                                                  <td id="GICS1">GICS1</td>
                                                 </tr>
                                               </tbody>
                                             </table>
@@ -323,7 +323,7 @@
 
 						<div class="row" >
 
-						  <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">                        
+						  <div class="col-xs-12 col-sm-12 col-md-5 col-lg-5 col-xl-5">                        
                                 <div class="card mb-3">
                                     <div class="card-header">
                                         <h3><i class="fa fa-line-chart"></i> 历年财务信息</h3>
@@ -336,8 +336,8 @@
                                 </div><!-- end card-->                  
                             </div><!-- end col--> 
 
-                            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">                        
-                                <div class="card mb-3">
+                            <div class="col-xs-12 col-sm-12 col-md-7 col-lg-7 col-xl-7">                        
+                                <div class="card mb-3 pre-scrollable">
                                    <div class="card-header">
                                             <h3><i class="fa fa-bars"></i> 历年交易信息</h3>
                                         </div>
@@ -348,41 +348,15 @@
                                               <thead>
                                                 <tr>
                                                   <th scope="col">交易年</th>
-                                                  <th scope="col">股票代码</th>
                                                   <th scope="col">关联方企业</th>
                                                   <th scope="col">涉及金额</th>
                                                   <th scope="col">交易类型</th>
+                                                  <th scope="col">关联方控制关系</th>
                                                 </tr>
                                               </thead>
-                                              <tbody>
-                                                <tr>
-                                                  <th>2019</th>
-                                                  <td>0001</td>
-                                                  <td>深圳国际信托投资公司</td>
-                                                  <td>150000000000</td>
-                                                  <td>1601</td>
-                                                </tr>
-                                                <tr>
-                                                  <th>2019</th>
-                                                  <td>0001</td>
-                                                  <td>深圳国际信托投资公司</td>
-                                                  <td>150000000000</td>
-                                                  <td>1601</td>
-                                                </tr>
-                                                <tr>
-                                                  <th>2019</th>
-                                                  <td>0001</td>
-                                                  <td>深圳国际信托投资公司</td>
-                                                  <td>150000000000</td>
-                                                  <td>1601</td>
-                                                </tr>
-                                                <tr>
-                                                  <th>2019</th>
-                                                  <td>0001</td>
-                                                  <td>深圳国际信托投资公司</td>
-                                                  <td>150000000000</td>
-                                                  <td>1601</td>
-                                                </tr>
+                                              <tbody id="trans_table">
+                                                
+                                               
                                               </tbody>
                                             </table>
                                             
@@ -405,7 +379,7 @@
 		<span class="text-right">
 		Copyright <a target="_blank" href="#">企业信息查询系统</a>
 		</span>
-		<span class="float-right">小组成员：李静瑶 贺潇潇 冯煜
+		<span class="float-right">小组成员：李婧瑶 贺潇潇 冯煜
 		</span>
 	</footer>
 
@@ -414,6 +388,8 @@
 
 <script src="assets/js/modernizr.min.js"></script>
 <script src="assets/js/jquery.min.js"></script>
+<script src="assets/js/jquery.cookie.js"></script>
+
 <script src="assets/js/moment.min.js"></script>
 		
 <script src="assets/js/popper.min.js"></script>
@@ -450,106 +426,121 @@
     </script>
 	
 	<script>
-   var ctx1 = document.getElementById("finance").getContext('2d');
-    var finance = new Chart(ctx1, {
-        type: 'bar',
-        data: {
-            labels: ["2002", "2003", "2004", "2005", "2006", "2007", "2008", "2009", "2010", "2011", "2012", "2013"],
-            datasets: [{
-                    type: 'line',
-                    label: '总资产',
-                    borderColor: '#484c4f',
-                    backgroundColor: '#484c4f',
-                    borderWidth: 3,
-                    fill: false,
-                    data: [12, 19, 3, 5, 2, 3, 13, 17, 11, 8, 11, 9],
-                }, {
-                    type: 'line',
-                    label: '净利润',
-                    borderColor:  'rgba(75, 192, 192, 1)',
-                    backgroundColor: 'rgba(75, 192, 192, 1)',
-                    borderWidth: 3,
-                    fill: false,
-                    data: [13, 17, 11, 8, 11, 9, 12, 19, 3, 5, 2, 3],
-                },{
-                    type: 'line',
-                    label: '营业收入',
-                    borderColor: 'rgba(255,99,132,1)',
-                    backgroundColor: 'rgba(255,99,132,1)',
-                    borderWidth: 3,
-                    fill: false,
-                    data: [12, 22, 2, 5, 21, 1, 1, 7, 12, 8, 1, 11],
-                }]
-                
-        },
-        options: {
-                        tooltips: {
-                            mode: 'index',
-                            intersect: false
-                        },
-                        responsive: true,
-                        scales: {
-                            xAxes: [{
-                                stacked: true,
-                            }],
-                            yAxes: [{
-                                stacked: true
-                            }]
-                        }
+        $(document).ready(function(){
+            var a = $.cookie();
+            var dataVal = {"query_type": a.query_type, "info":a.info};
+            console.log("json sending: "+dataVal);
+            $.ajax({
+                url:"http://127.0.0.1:8080/StockBasic",
+                type:"POST",
+                data : JSON.stringify(dataVal),
+                dataType: "json",
+                contenType: "application/json; charset=utf-8",
+                async : false, 
+                crossDomain: true,
+                processData: false,
+                headers: {
+                'Access-Control-Allow-Credentials' : true,
+                'Access-Control-Allow-Origin':'*',
+                'Access-Control-Allow-Methods':'OPTIONS,POST,GET',
+                'X-Conten-Type-Options':'nosniff',
+              },
+                success:function(resp) {
+                    console.log("success");
+                    console.log("resp: "+resp);
+                    if (resp.status == true){
+                        $("#company_name").html(resp.company_name);
+                        $("#stock_name").html(resp.stock_name);
+                        $("#location").html(resp.location);
+                        $("#CSRC1").html(resp.CSRC1);
+                        $("#GICS1").html(resp.GICS1);
+
+                        pathC = '/';
+                        $.cookie('company_name', resp.company_name, { expires: 7, path: pathC });
+                        $.cookie('stock_name', resp.stock_name, { expires: 7, path: pathC });
+                        $.cookie('location', resp.location, { expires: 7, path: pathC });
+                        $.cookie('CSRC1', resp.CSRC1, { expires: 7, path: pathC });
+                        $.cookie('GICS1', resp.GICS1, { expires: 7, path: pathC });
+
+                        draw_finance(resp.Y, resp.T, resp.N, resp.O);
+                        draw_trans(resp.Trans);
                     }
-    });
-
-    // deal
-    var ctx1 = document.getElementById("deal").getContext('2d');
-    var deal = new Chart(ctx1, {
-        type: 'line',
-        data: {
-            labels: ["2002", "2003", "2004", "2005", "2006", "2007", "2008", "2009", "2010", "2011", "2012", "2013"],
-            datasets: [{
-                    type: 'line',
-                    label: '总资产',
-                    borderColor: '#484c4f',
-                    backgroundColor: '#484c4f',
-                    borderWidth: 3,
-                    fill: false,
-                    data: [12, 19, 3, 5, 2, 3, 13, 17, 11, 8, 11, 9],
-                }, {
-                    type: 'line',
-                    label: '净利润',
-                    borderColor:  'rgba(75, 192, 192, 1)',
-                    backgroundColor: 'rgba(75, 192, 192, 1)',
-                    borderWidth: 3,
-                    fill: false,
-                    data: [13, 17, 11, 8, 11, 9, 12, 19, 3, 5, 2, 3],
-                },{
-                    type: 'line',
-                    label: '营业收入',
-                    borderColor: 'rgba(255,99,132,1)',
-                    backgroundColor: 'rgba(255,99,132,1)',
-                    borderWidth: 3,
-                    fill: false,
-                    data: [12, 22, 2, 5, 21, 1, 1, 7, 12, 8, 1, 11],
-                }]
-                
-        },
-        options: {
-                        tooltips: {
-                            mode: 'index',
-                            intersect: false
-                        },
-                        responsive: true,
-                        scales: {
-                            xAxes: [{
-                                stacked: true,
-                            }],
-                            yAxes: [{
-                                stacked: true
-                            }]
-                        }
+                    else{
+                        alert("meet some error,"+ resp.error);
                     }
-    });
+                    
 
+                },
+                error:function(resp){
+                    console.log("error");
+                    alert("unexcepted error,"+resp.error);
+                },
+            });
+        });
 
+    </script>
+
+    <script>   
+        function draw_finance( y, t, n, o){
+            var ctx1 = document.getElementById("finance").getContext('2d');
+            var finance = new Chart(ctx1, {
+                type: 'line',
+                data: {
+                    labels: y,
+                    datasets: [{
+                            type: 'line',
+                            label: '总资产',
+                            borderColor: '#484c4f',
+                            backgroundColor: '#484c4f',
+                            borderWidth: 3,
+                            fill: false,
+                            data: t,
+                        }, {
+                            type: 'line',
+                            label: '净利润',
+                            borderColor:  'rgba(75, 192, 192, 1)',
+                            backgroundColor: 'rgba(75, 192, 192, 1)',
+                            borderWidth: 3,
+                            fill: false,
+                            data: n,
+                        },{
+                            type: 'line',
+                            label: '营业收入',
+                            borderColor: 'rgba(255,99,132,1)',
+                            backgroundColor: 'rgba(255,99,132,1)',
+                            borderWidth: 3,
+                            fill: false,
+                            data: o,
+                        }]
+                        
+                },
+                options: {
+                                tooltips: {
+                                    mode: 'index',
+                                    intersect: false
+                                },
+                                responsive: true,
+                                scales: {
+                                    xAxes: [{
+                                        stacked: true,
+                                    }],
+                                    yAxes: [{
+                                        stacked: true,
+                                    }]
+                                }
+                            }
+            });
+        }
+
+        function draw_trans(data){
+            for(i=0; i< data.length; i++){
+                $("#trans_table").append("<tr>");
+                for(j = 0; j < data[i].length;j++){
+                    $("#trans_table").append("<td>"+data[i][j]+"</td>");
+                }
+                $("#trans_table").append("</tr>");
+            }
+        }
 	</script>
 <!-- END Java Script for this page -->
 

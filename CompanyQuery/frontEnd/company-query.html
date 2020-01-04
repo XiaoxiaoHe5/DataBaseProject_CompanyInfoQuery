@@ -306,10 +306,10 @@
                                                 <label for="company-type">
                                                 根据以下查询 
                                                 </label>
-                                                <select class="form-control select2" id="company-type" name="state">
-                                                    <option value="AR">公司名字</option>
-                                                    <option value="AU">股票代码</option>
-                                                    <option value="AT">股票简称</option>
+                                                <select class="form-control select2" id="query-type" name="state">
+                                                    <option value="1">公司名字</option>
+                                                    <option value="2">股票代码</option>
+                                                    <option value="3">股票简称</option>
                                                 </select>
                                         </div>                                                      
                                     </div><!-- end card-->       
@@ -318,14 +318,14 @@
 
                                         <div class="card-body">
 
-                                            <form action="financ-deal.html" data-parsley-validate novalidate>
+                                            <form action="financ-deal.html" data-parsley-validate novalidate >
                                                     <div class="form-group">
                                                         <label for="info">已知信息<span class="text-danger">*</span></label>
                                                         <input type="text" name="nick" data-parsley-trigger="change" required placeholder="请输入信息查询" class="form-control" id="info">
                                                     </div>
 
                                                     <div class="form-group text-right m-b-0">
-                                                        <button class="btn btn-primary" type="submit">
+                                                        <button class="btn btn-primary" type="submit" onclick="postData()">
                                                             提交
                                                         </button>
                                                         <button type="reset" class="btn btn-secondary m-l-5">
@@ -356,7 +356,7 @@
 		<span class="text-right">
 		Copyright <a target="_blank" href="#">企业信息查询系统</a>
 		</span>
-		<span class="float-right">小组成员：李静瑶 贺潇潇 冯煜
+		<span class="float-right">小组成员：李婧瑶 贺潇潇 冯煜
 		</span>
 	</footer>
 
@@ -365,6 +365,7 @@
 
 <script src="assets/js/modernizr.min.js"></script>
 <script src="assets/js/jquery.min.js"></script>
+<script src="assets/js/jquery.cookie.js"></script>
 <script src="assets/js/moment.min.js"></script>
 		
 <script src="assets/js/popper.min.js"></script>
@@ -385,6 +386,7 @@
 <script src="assets/plugins/parsleyjs/parsley.min.js"></script>
 <script>
   $('#form').parsley();
+</script>  
 
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
 	<script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
@@ -395,14 +397,32 @@
 	<script src="assets/plugins/counterup/jquery.counterup.min.js"></script>			
 
 	<script>
+        function postData() {
+            console.log("in postData");
+            var query_type = $(" #query-type").val();
+            var info = $(" #info").val();
+            var pathC = "/"
+            $.cookie('query_type', query_type, { expires: 7, path: pathC });
+            $.cookie('info', info, { expires: 7, path: pathC});
+
+        }
+
+
 		$(document).ready(function() {
 			// data-tables
-			$('#company-type').DataTable();
-					
-			// counter-up
-			$('.counter').counterUp({
-				delay: 10,
-			
+            $('#example1').DataTable();
+                    
+            // counter-up
+            $('.counter').counterUp({
+                delay: 10,
+                time: 600
+            });
+
+
+        });
+
+	</script>  	
+
 <!-- END Java Script for this page -->
 
 </body>

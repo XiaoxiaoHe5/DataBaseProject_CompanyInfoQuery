@@ -245,7 +245,12 @@
                     </li>
 
                     <li class="submenu">
-                        <a href="login.html"><i class="fa fa-fw fa-th"></i><span> 企业信息修改 </span> </a>
+                        <a href="login.html"><i class="fa fa-fw fa-area-chart"></i><span> 企业信息修改 </span><span class="menu-arrow"></span></a>
+                            <ul class="list-unstyled">
+                                <li><a href="modify.html">修改企业信息</a></li>
+                                <li ><a href="insert.html">增加企业涉案信息</a></li>
+                                <li><a href="delete.html">删除企业涉案信息</a></li>
+                            </ul>
                     </li>
 					
             </ul>
@@ -305,11 +310,11 @@
                                               </thead>
                                               <tbody>
                                                 <tr>
-                                                  <td>company name</td>
-                                                  <td>stock name</td>
-                                                  <td>location</td>
-                                                  <td>CSRC1</td>
-                                                  <td>GICS1</td>
+                                                  <td id="company_name">company name</td>
+                                                  <td id="stock_name">stock name</td>
+                                                  <td id="location">location</td>
+                                                  <td id="CSRC1">CSRC1</td>
+                                                  <td id="GICS1">GICS1</td>
                                                 </tr>
                                               </tbody>
                                             </table>
@@ -351,7 +356,7 @@
 		<span class="text-right">
 		Copyright <a target="_blank" href="#">企业信息查询系统</a>
 		</span>
-		<span class="float-right">小组成员：李静瑶 贺潇潇 冯煜
+		<span class="float-right">小组成员：李婧瑶 贺潇潇 冯煜
 		</span>
 	</footer>
 
@@ -360,6 +365,7 @@
 
 <script src="assets/js/modernizr.min.js"></script>
 <script src="assets/js/jquery.min.js"></script>
+<script src="assets/js/jquery.cookie.js"></script>
 <script src="assets/js/moment.min.js"></script>
 		
 <script src="assets/js/popper.min.js"></script>
@@ -394,45 +400,91 @@
             });
         } );        
     </script>
+
+    <script>
+        $(document).ready(function(){
+            var a = $.cookie();
+            var dataVal = {"query_type": a.query_type, "info":a.info};
+            console.log("json sending: "+dataVal.query_type, dataVal.info);
+
+            console.log(a.company_name);
+            $("#company_name").html(a.company_name);
+            $("#stock_name").html(a.stock_name);
+            $("#location").html(a.location);
+            $("#CSRC1").html(a.CSRC1);
+            $("#GICS1").html(a.GICS1);
+
+            $.ajax({
+                url:"http://127.0.0.1:8080/GetStock",
+                type:"POST",
+                data : JSON.stringify(dataVal),
+                dataType: "json",
+                contenType: "application/json; charset=utf-8",
+                async : false, 
+                crossDomain: true,
+                processData: false,
+                headers: {
+                'Access-Control-Allow-Credentials' : true,
+                'Access-Control-Allow-Origin':'*',
+                'Access-Control-Allow-Methods':'OPTIONS,POST,GET',
+                'X-Conten-Type-Options':'nosniff',
+              },
+                success:function(resp) {
+                    console.log("success");
+                    console.log("resp: "+resp);
+                        console.log(resp.name_all[0]);
+                        draw_stock(resp.year, resp.name_1, resp.name_2, resp.name_3, resp.name_4, resp.name_all); 
+
+                },
+                error:function(resp){
+                    console.log("error");
+                    alert("unexcepted error,"+resp.error);
+                },
+            });
+        });
+
+    </script>
 	
 	<script>
+        function draw_stock(year,name_1,name_2, name_3, name_4,name_all) {
+            
    var ctx1 = document.getElementById("hoder").getContext('2d');
     var hoder = new Chart(ctx1, {
         type: 'line',
         data: {
-            labels: [ "2010", "2011", "2012", "2013"],
+            labels:year,
             datasets: [{
                     type: 'line',
-                    label: '小贺',
+                    label: name_all[0],
                     borderColor: '#484c4f',
                     backgroundColor: '#484c4f',
                     borderWidth: 3,
                     fill: false,
-                    data: [12, 19, 20, 29,10],
+                    data: name_1,
                 }, {
                     type: 'line',
-                    label: '小李',
+                    label: name_all[1],
                     borderColor:  'rgba(75, 192, 192, 1)',
                     backgroundColor: 'rgba(75, 192, 192, 1)',
                     borderWidth: 3,
                     fill: false,
-                    data: [ 3, 5, 2, 3,13],
+                    data: name_2,
                 },{
                     type: 'line',
-                    label: '小冯',
+                    label: name_all[2],
                     borderColor: 'rgba(255,99,132,1)',
                     backgroundColor: 'rgba(255,99,132,1)',
                     borderWidth: 3,
                     fill: false,
-                    data: [12, 22, 2, 5,1],
+                    data: name_3,
                 },{
                     type: 'line',
-                    label: '小王',
+                    label: name_all[3],
                     borderColor: 'rgba(54, 162, 235, 1)',
                     backgroundColor:'rgba(54, 162, 235, 1)',
                     borderWidth: 3,
                     fill: false,
-                    data: [10, 22, 21, 25,26],
+                    data: name_3,
                 }]
                 
         },
@@ -452,56 +504,8 @@
                         }
                     }
     });
+}
 
-    // deal
-    var ctx1 = document.getElementById("deal").getContext('2d');
-    var deal = new Chart(ctx1, {
-        type: 'bar',
-        data: {
-            labels: ["2002", "2003", "2004", "2005", "2006", "2007", "2008", "2009", "2010", "2011", "2012", "2013"],
-            datasets: [{
-                    type: 'line',
-                    label: '总资产',
-                    borderColor: '#484c4f',
-                    backgroundColor: '#484c4f',
-                    borderWidth: 3,
-                    fill: false,
-                    data: [12, 19, 3, 5, 2, 3, 13, 17, 11, 8, 11, 9],
-                }, {
-                    type: 'line',
-                    label: '净利润',
-                    borderColor:  'rgba(75, 192, 192, 1)',
-                    backgroundColor: 'rgba(75, 192, 192, 1)',
-                    borderWidth: 3,
-                    fill: false,
-                    data: [13, 17, 11, 8, 11, 9, 12, 19, 3, 5, 2, 3],
-                },{
-                    type: 'line',
-                    label: '营业收入',
-                    borderColor: 'rgba(255,99,132,1)',
-                    backgroundColor: 'rgba(255,99,132,1)',
-                    borderWidth: 3,
-                    fill: false,
-                    data: [12, 22, 2, 5, 21, 1, 1, 7, 12, 8, 1, 11],
-                }]
-                
-        },
-        options: {
-                        tooltips: {
-                            mode: 'index',
-                            intersect: false
-                        },
-                        responsive: true,
-                        scales: {
-                            xAxes: [{
-                                stacked: true,
-                            }],
-                            yAxes: [{
-                                stacked: true
-                            }]
-                        }
-                    }
-    });
 
 
 	</script>
