@@ -424,3 +424,51 @@ def Insert(request):
     response["X-Content-Type-Options"] = "nosniff"
     response["Content-Type"] = "application/json; charset=UTF-8"
     return response
+
+@csrf_exempt
+def Delete(request):
+    if request.method == "POST":
+        d = json.loads(request.body.decode('utf-8'))
+        conn = LinkDatabase()
+        cursor = conn.cursor()
+        res = {}
+
+        Cn = d["case_num"]
+        SK = d["UStockcode"] # 原样返回收到的Stockcode即可，用户只需要输入 案件号
+
+        JSQL = "select Stockcode from LawCase where Caseno = '" + Cn + "';"
+        cursor.execute(JSQL)
+        SK2 = cursor.fetchone()
+
+        if not SK2 == SK:  # 没有删除的权限
+            res['status'] = False
+            res["error"] = "没有对应个股的删除权限"
+        else:
+            DSQL = "Delete from LawCase where Caseno = '" + Cn + "';"
+            try:
+                cursor.execute(DSQL)
+                # 提交事务
+                conn.commit()
+            except Exception as e:
+                # 有异常，回滚事务
+                conn.rollback()
+                res['status'] = False
+                res["error"] = "删除失败"
+            if not res:
+                res['status'] = True
+
+        cursor.close()
+        conn.close()
+    else:
+        res = {}
+    response = JsonResponse(res)
+    response["Access-Control-Allow-Origin"] = "*"
+    response["Access-Control-Allow-Methods"] = "GET,HEAD,OPTIONS,POST,PUT"
+    response["Access-Control-Allow-Headers"] = "Access-Control-Allow-Methods,Access-Control-Allow-Credentials," \
+                                               "Access-Control-Allow-Origin," \
+                                               "X-Conten-Type-Options," \
+                                               "Content-Type,Origin,Accept"
+    response["Access-Control-Allow-Credentials"] = "true"
+    response["X-Content-Type-Options"] = "nosniff"
+    response["Content-Type"] = "application/json; charset=UTF-8"
+    return response

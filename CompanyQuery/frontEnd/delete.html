@@ -301,39 +301,22 @@
 						<!-- end row -->
 					
 						<div class="row">
-								<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-center-block">
+                                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-center-block">
 
                                     <div class="card mb-3">
+
                                         <div class="card-header">
-                                            <h3><i class="fa fa-hand-pointer-o"></i> 企业信息修改</h3>
-                                            <div id="UStockcode">您能修改的企业代码：</div>
+                                            <h3><i class="fa fa-hand-pointer-o"></i> 企业涉案信息删除</h3>
+                                             您有权修改<span id="UStockcode"></span>公司的涉案信息
+                                            
                                         </div>
-
-                                        <div class="card-body">
-                                                <label for="company-type">
-                                                选择要修改的列 
-                                                </label>
-                                                <select class="form-control select2" id="attribute" name="state">
-                                                    <option value="1">公司名字</option>
-                                                    <option value="2">股票简称</option>
-                                                    <option value="3">证券交易所</option>
-                                                    <option value="4">CSRC分类</option>
-                                                    <option value="5">GICS分类</option>
-                                                </select>
-                                        </div>                                                      
-                                    </div><!-- end card-->  
-
-                                    <div class="card mb-3">
-
-                                        
 
                                         <div class="card-body">
 
                                             <form action="#" data-parsley-validate novalidate>
-
                                                     <div class="form-group">
-                                                        <label for="new-val">新的值<span class="text-danger">*</span></label>
-                                                        <input type="text" name="nick" data-parsley-trigger="change" required placeholder="请输入修改后的值" class="form-control" id="new_val">
+                                                        <label for="user_id">请输入要删除的案件号<span class="text-danger">*</span></label>
+                                                        <input type="text" name="nick" data-parsley-trigger="change" required placeholder="请输入案件号" class="form-control" id="case_num">
                                                     </div>
 
                                                     <div class="form-group text-right m-b-0">
@@ -350,9 +333,9 @@
                                         </div>                                                      
                                     </div><!-- end card-->                  
                                 </div><!-- end bootstrap col--> 
-							
-				        </div>
-						<!-- end row -->
+                            
+                        </div>
+                        <!-- end row -->
 
 
             </div>
@@ -431,13 +414,12 @@
         function postData() {
             console.log("in postData");
             var company_id = $.cookie('UStockcode');
-            var attribute = $(" #attribute").val();
-            var new_val = $("#new_val").val();
-            var dataVal = {"company_id": company_id, "attribute":attribute, "new_val":new_val};
-            console.log("json sending: "+dataVal.company_id);
+            var case_num = $(" #case_num").val();
+            var dataVal = {"UStockcode": company_id, "case_num":case_num};
+            console.log("json sending: "+dataVal.UStockcode+dataVal.case_num);
 
             $.ajax({
-                url:"http://127.0.0.1:8080/Modify",
+                url:"http://127.0.0.1:8080/Delete",
                 type:"POST",
                 data : JSON.stringify(dataVal),
                 dataType: "json",
@@ -455,10 +437,10 @@
                     console.log("success");
                     console.log("resp: "+resp.status);
                     if (resp.status == true){
-                        alert("修改成功！");
+                        alert("删除成功！");
                     }
                     else{
-                        alert("修改失败。"+resp.error);
+                        alert("删除失败，"+resp.error);
                     }
                     
 

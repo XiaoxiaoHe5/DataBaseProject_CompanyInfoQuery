@@ -427,8 +427,9 @@
                     console.log("success");
                     console.log("resp: "+resp);
                     if (resp.status == true){
-                        window.location.href = './modify.html';
+                        console.log("login success~")
                         $.cookie('UStockcode', resp.UStockcode, { expires: 7, path: pathC});
+                        window.location.href = 'modify.html';
                     }
                     else{
                         alert(resp.error);

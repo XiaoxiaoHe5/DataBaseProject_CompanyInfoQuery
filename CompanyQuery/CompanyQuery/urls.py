@@ -25,7 +25,7 @@ urlpatterns = [
     path('GetStock', views.GetStock, name = 'GetStock'),
     path('Login', views.Login, name = 'Login'),
     path('Modify', views.Modify, name = 'Modify'),
-
+    path('Delete', views.Delete, name='Delete'),
     path('Insert', views.Insert, name='Insert'),
 
 ]
