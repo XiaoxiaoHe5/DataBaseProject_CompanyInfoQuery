@@ -7,6 +7,20 @@ import pandas as pd
 
 import pymysql
 
+def BuildResp(res):
+    response = JsonResponse(res)
+    response["Access-Control-Allow-Origin"] = "*"
+    response["Access-Control-Allow-Methods"] = "GET,HEAD,OPTIONS,POST,PUT"
+    response["Access-Control-Allow-Headers"] = "Access-Control-Allow-Methods,Access-Control-Allow-Credentials," \
+                                               "Access-Control-Allow-Origin," \
+                                               "X-Conten-Type-Options," \
+                                               "Content-Type,Origin,Accept"
+    response["Access-Control-Allow-Credentials"] = "true"
+    response["X-Content-Type-Options"] = "nosniff"
+    response["Content-Type"] = "application/json; charset=UTF-8"
+    return response
+
+
 def LinkDatabase(): # 连接数据库
     config = {
         'host': 'localhost',
@@ -21,6 +35,7 @@ def LinkDatabase(): # 连接数据库
 
 @csrf_exempt
 def index(request):
+
     conn = LinkDatabase()
     cursor = conn.cursor()
 
@@ -37,18 +52,8 @@ def index(request):
     print(NS)
 
     res = {'company_num': NS, 'stock_num': NSH, 'status':True}
-    # 以下为response消息头固定格式
-    response = JsonResponse(res)
-    response["Access-Control-Allow-Origin"] = "*"
-    response["Access-Control-Allow-Methods"] = "GET,HEAD,OPTIONS,POST,PUT"
-    response["Access-Control-Allow-Headers"] = "Access-Control-Allow-Methods,Access-Control-Allow-Credentials," \
-                                               "Access-Control-Allow-Origin," \
-                                               "X-Conten-Type-Options," \
-                                               "Content-Type,Origin,Accept"
-    response["Access-Control-Allow-Credentials"] = "true"
-    response["X-Content-Type-Options"] = "nosniff"
-    response["Content-Type"] = "application/json; charset=UTF-8"
-    return response
+
+    return BuildResp(res)
 
 @csrf_exempt
 def StockBasic(request):  #查询公司基本信息
@@ -130,17 +135,7 @@ def StockBasic(request):  #查询公司基本信息
     else:
         res = {}
 
-    response = JsonResponse(res)
-    response["Access-Control-Allow-Origin"] = "*"
-    response["Access-Control-Allow-Methods"] = "GET,HEAD,OPTIONS,POST,PUT"
-    response["Access-Control-Allow-Headers"] = "Access-Control-Allow-Methods,Access-Control-Allow-Credentials," \
-                                               "Access-Control-Allow-Origin," \
-                                               "X-Conten-Type-Options," \
-                                               "Content-Type,Origin,Accept"
-    response["Access-Control-Allow-Credentials"] = "true"
-    response["X-Content-Type-Options"] = "nosniff"
-    response["Content-Type"] = "application/json; charset=UTF-8"
-    return response
+    return BuildResp(res)
 
     return JsonResponse(res)
 
@@ -201,17 +196,8 @@ def GetLawCase(request):  #得到涉案信息
 
     print (res)
 
-    response = JsonResponse(res)
-    response["Access-Control-Allow-Origin"] = "*"
-    response["Access-Control-Allow-Methods"] = "GET,HEAD,OPTIONS,POST,PUT"
-    response["Access-Control-Allow-Headers"] = "Access-Control-Allow-Methods,Access-Control-Allow-Credentials," \
-                                               "Access-Control-Allow-Origin," \
-                                               "X-Conten-Type-Options," \
-                                               "Content-Type,Origin,Accept"
-    response["Access-Control-Allow-Credentials"] = "true"
-    response["X-Content-Type-Options"] = "nosniff"
-    response["Content-Type"] = "application/json; charset=UTF-8"
-    return response
+
+    return BuildResp(res)
 
 
 @csrf_exempt
@@ -252,17 +238,8 @@ def Login(request):
 
     print (res)
 
-    response = JsonResponse(res)
-    response["Access-Control-Allow-Origin"] = "*"
-    response["Access-Control-Allow-Methods"] = "GET,HEAD,OPTIONS,POST,PUT"
-    response["Access-Control-Allow-Headers"] = "Access-Control-Allow-Methods,Access-Control-Allow-Credentials," \
-                                               "Access-Control-Allow-Origin," \
-                                               "X-Conten-Type-Options," \
-                                               "Content-Type,Origin,Accept"
-    response["Access-Control-Allow-Credentials"] = "true"
-    response["X-Content-Type-Options"] = "nosniff"
-    response["Content-Type"] = "application/json; charset=UTF-8"
-    return response
+
+    return BuildResp(res)
 
 @csrf_exempt
 def GetStock(request):  #查询公司基本信息
@@ -311,23 +288,14 @@ def GetStock(request):  #查询公司基本信息
             dict.append(df_1)
         res = {'year': df['year'][0:num].tolist(), 'name_1': dict[0], 'name_2': dict[1], 'name_3': dict[2],
                'name_4': dict[3], 'name_all': name}
+        res["status"] = True
 
     else:
         res = {}
 
     print (res)
 
-    response = JsonResponse(res)
-    response["Access-Control-Allow-Origin"] = "*"
-    response["Access-Control-Allow-Methods"] = "GET,HEAD,OPTIONS,POST,PUT"
-    response["Access-Control-Allow-Headers"] = "Access-Control-Allow-Methods,Access-Control-Allow-Credentials," \
-                                               "Access-Control-Allow-Origin," \
-                                               "X-Conten-Type-Options," \
-                                               "Content-Type,Origin,Accept"
-    response["Access-Control-Allow-Credentials"] = "true"
-    response["X-Content-Type-Options"] = "nosniff"
-    response["Content-Type"] = "application/json; charset=UTF-8"
-    return response
+    return BuildResp(res)
 
 @csrf_exempt
 def Modify(request):  #查询公司基本信息
@@ -336,6 +304,7 @@ def Modify(request):  #查询公司基本信息
         cursor = conn.cursor()
         res = {}
         d = json.loads(request.body.decode('utf-8'))
+        print(d)
         UStockcode = d["company_id"] # 可以修改的企业股票代码
         C = int(d["attribute"] )# 需要修改的列：1公司名字 2股票简称 3证券交易所 4CSRC分类 5GICS分类;注意！C要是数字不能为字符
         NewValue = d["new_val"]  # 修改后的新值
@@ -360,18 +329,8 @@ def Modify(request):  #查询公司基本信息
         conn.close()
     else:
         res = {}
-    # 以下为response消息头固定格式
-    response = JsonResponse(res)
-    response["Access-Control-Allow-Origin"] = "*"
-    response["Access-Control-Allow-Methods"] = "GET,HEAD,OPTIONS,POST,PUT"
-    response["Access-Control-Allow-Headers"] = "Access-Control-Allow-Methods,Access-Control-Allow-Credentials," \
-                                               "Access-Control-Allow-Origin," \
-                                               "X-Conten-Type-Options," \
-                                               "Content-Type,Origin,Accept"
-    response["Access-Control-Allow-Credentials"] = "true"
-    response["X-Content-Type-Options"] = "nosniff"
-    response["Content-Type"] = "application/json; charset=UTF-8"
-    return response
+
+    return BuildResp(res)
 
 @csrf_exempt
 def Insert(request):
@@ -413,17 +372,8 @@ def Insert(request):
         conn.close()
     else:
         res = {}
-    response = JsonResponse(res)
-    response["Access-Control-Allow-Origin"] = "*"
-    response["Access-Control-Allow-Methods"] = "GET,HEAD,OPTIONS,POST,PUT"
-    response["Access-Control-Allow-Headers"] = "Access-Control-Allow-Methods,Access-Control-Allow-Credentials," \
-                                               "Access-Control-Allow-Origin," \
-                                               "X-Conten-Type-Options," \
-                                               "Content-Type,Origin,Accept"
-    response["Access-Control-Allow-Credentials"] = "true"
-    response["X-Content-Type-Options"] = "nosniff"
-    response["Content-Type"] = "application/json; charset=UTF-8"
-    return response
+
+    return BuildResp(res)
 
 @csrf_exempt
 def Delete(request):
@@ -461,14 +411,4 @@ def Delete(request):
         conn.close()
     else:
         res = {}
-    response = JsonResponse(res)
-    response["Access-Control-Allow-Origin"] = "*"
-    response["Access-Control-Allow-Methods"] = "GET,HEAD,OPTIONS,POST,PUT"
-    response["Access-Control-Allow-Headers"] = "Access-Control-Allow-Methods,Access-Control-Allow-Credentials," \
-                                               "Access-Control-Allow-Origin," \
-                                               "X-Conten-Type-Options," \
-                                               "Content-Type,Origin,Accept"
-    response["Access-Control-Allow-Credentials"] = "true"
-    response["X-Content-Type-Options"] = "nosniff"
-    response["Content-Type"] = "application/json; charset=UTF-8"
-    return response
+    return   BuildResp(res)
